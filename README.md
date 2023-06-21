@@ -1,5 +1,5 @@
 # dragonion
-Most modern-looking, encrypted and functional in-console onion chat that YOU control! 
+Most modern-looking, encrypted and functional in-console onion chat that you control! 
 
 ## 📝 Note
 Dragonion IS NOT a chat for everyday use. It is specific application focused on
