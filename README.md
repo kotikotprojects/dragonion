@@ -10,3 +10,7 @@ by yourself or using existing server, hosted by your guild/organisation.
 We don't provide any official servers.
 
 DRAGONION IS NOW IN EARLY DEVELOPMENT AND THERE AREN'T ANY RELEASES HERE
+
+## 📃 Credits
+- [OnionShare project](https://github.com/onionshare) - code inspiration for integrating
+application with tor
