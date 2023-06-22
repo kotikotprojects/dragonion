@@ -17,6 +17,7 @@ def dir_size(start_path):
 
 def get_resource_path(filename):
     if const.portable:
+        # noinspection PyUnresolvedReferences, PyProtectedMember
         application_path = os.path.join(os.path.abspath(sys._MEIPASS), 'resources')
     else:
         import dragonion
@@ -42,6 +43,7 @@ def get_tor_paths():
 
 def build_data_dir():
     if const.portable:
+        # noinspection PyUnresolvedReferences, PyProtectedMember
         dragonion_data_dir = os.path.join(os.path.abspath(sys._MEIPASS), 'data')
     else:
         import dragonion
@@ -67,4 +69,3 @@ def build_tor_data_dir():
     tor_dir = os.path.join(build_data_dir(), "tor_data")
     os.makedirs(tor_dir, exist_ok=True)
     return tor_dir
-
