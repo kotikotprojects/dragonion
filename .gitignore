@@ -3,6 +3,7 @@
 /tests/
 /build/
 /dist/
+/dragonion/data/
 __pycache__
 
 poetry.lock
