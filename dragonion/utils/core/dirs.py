@@ -21,12 +21,14 @@ def get_resource_path(filename):
         application_path = os.path.join(os.path.abspath(sys._MEIPASS), 'resources')
     else:
         import dragonion
-        application_path = os.path.join(os.path.dirname(dragonion.__file__), 'resources')
+        application_path = os.path.join(os.path.dirname(dragonion.__file__),
+                                        'resources')
 
     return os.path.join(application_path, filename)
 
 
 def get_tor_paths():
+    
     from ..onion.tor_downloader import download_tor
     if platform.system() in ["Linux", "Darwin"]:
         tor_path = os.path.join(build_data_dir(), 'tor/tor')
