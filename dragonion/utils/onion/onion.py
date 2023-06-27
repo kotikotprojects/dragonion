@@ -35,7 +35,7 @@ class Onion(object):
     tor_socks_port: int
     tor_cookie_auth_file: str
     tor_path: str = dirs.get_tor_paths()
-    tor_proc: subprocess.Popen
+    tor_proc: subprocess.Popen | None
     connected_to_tor: bool = False
     auth_string: str
     graceful_close_onions: list = list()
