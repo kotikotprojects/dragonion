@@ -105,17 +105,14 @@ class Onion(object):
         with open(self.tor_torrc, "w") as f:
             f.write(torrc_template)
 
-    def connect(self, connect_timeout=60):
+    def connect(self):
         self.fill_torrc(self.tor_data_directory_name)
 
-        start_ts = time.time()
         if platform.system() == "Windows":
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
             self.tor_proc = subprocess.Popen(
                 [self.tor_path, "-f", self.tor_torrc],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
                 startupinfo=startupinfo,
             )
         else:
@@ -123,8 +120,6 @@ class Onion(object):
 
             self.tor_proc = subprocess.Popen(
                 [self.tor_path, "-f", self.tor_torrc],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
                 env=env,
             )
 
@@ -137,39 +132,7 @@ class Onion(object):
             self.c = Controller.from_socket_file(path=self.tor_control_socket)
             self.c.authenticate()
 
-        while True:
-            try:
-                res = self.c.get_info("status/bootstrap-phase")
-            except SocketClosed:
-                raise
-
-            res_parts = shlex.split(res)
-            progress = res_parts[2].split("=")[1]
-            summary = res_parts[4].split("=")[1]
-
-            print(
-                f"\rConnecting to the Tor network: {progress}% - {summary}\033[K",
-                end="",
-            )
-
-            if summary == "Done":
-                print("")
-                break
-            time.sleep(0.2)
-
-            if time.time() - start_ts > connect_timeout:
-                print("")
-                try:
-                    self.tor_proc.terminate()
-                    print(
-                        "Taking too long to connect to Tor. Maybe you aren't "
-                        "connected to the Internet, or have an inaccurate "
-                        "system clock?"
-                    )
-                    self.cleanup()
-                    raise
-                except FileNotFoundError:
-                    pass
+        # TODO: CHANGE CONNECTION OPTION
 
         self.connected_to_tor = True
 
