@@ -5,17 +5,12 @@ import platform
 from . import const
 
 
-def dir_size(start_path):
-    total_size = 0
-    for dirpath, dirnames, filenames in os.walk(start_path):
-        for f in filenames:
-            fp = os.path.join(dirpath, f)
-            if not os.path.islink(fp):
-                total_size += os.path.getsize(fp)
-    return total_size
-
-
 def get_resource_path(filename):
+    """
+    Get path to file in resources folder
+    :param filename: Resource name to get path
+    :return:
+    """
     if const.portable:
         # noinspection PyUnresolvedReferences, PyProtectedMember
         application_path = os.path.join(os.path.abspath(sys._MEIPASS), 'resources')
@@ -28,7 +23,10 @@ def get_resource_path(filename):
 
 
 def get_tor_paths():
-    
+    """
+    Get path to tor executable and download it if not exists
+    :return:
+    """
     from ..onion.tor_downloader import download_tor
     if platform.system() in ["Linux", "Darwin"]:
         tor_path = os.path.join(build_data_dir(), 'tor/tor')
@@ -44,6 +42,10 @@ def get_tor_paths():
 
 
 def build_data_dir():
+    """
+    Get local data dir
+    :return:
+    """
     if const.portable:
         # noinspection PyUnresolvedReferences, PyProtectedMember
         dragonion_data_dir = os.path.join(os.path.abspath(sys._MEIPASS), 'data')
@@ -56,18 +58,30 @@ def build_data_dir():
 
 
 def build_tmp_dir():
+    """
+    Get "tmp" dir in data directory
+    :return:
+    """
     tmp_dir = os.path.join(build_data_dir(), "tmp")
     os.makedirs(tmp_dir, exist_ok=True)
     return tmp_dir
 
 
 def build_persistent_dir():
+    """
+    Get "persistent" dir in data directory
+    :return:
+    """
     persistent_dir = os.path.join(build_data_dir(), "persistent")
     os.makedirs(persistent_dir, exist_ok=True)
     return persistent_dir
 
 
 def build_tor_data_dir():
+    """
+    Get "tor_data" dir in data directory
+    :return:
+    """
     tor_dir = os.path.join(build_data_dir(), "tor_data")
     os.makedirs(tor_dir, exist_ok=True)
     return tor_dir

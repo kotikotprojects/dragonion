@@ -45,6 +45,9 @@ class Onion(object):
     os.makedirs(os.path.join(tor_data_directory_name, 'auth'))
 
     def kill_same_tor(self):
+        """
+        Kills tor process that looks like process to be created now
+        """
         for proc in psutil.process_iter(["pid", "name", "username"]):
             try:
                 cmdline = proc.cmdline()
@@ -59,7 +62,13 @@ class Onion(object):
             except Exception as e:
                 assert e
 
-    def get_config(self, tor_data_directory_name) -> dict:
+    def get_config(self, tor_data_directory_name: str) -> dict:
+        """
+        Build config dict for launching tor
+        :param tor_data_directory_name: Data directory for tor, can be generated
+                                        using code from core/dirs
+        :return:
+        """
         self.tor_cookie_auth_file = os.path.join(tor_data_directory_name, "cookie")
         try:
             self.tor_socks_port = get_available_port(1000, 65535)
@@ -98,6 +107,10 @@ class Onion(object):
         return config
 
     def connect(self):
+        """
+        Connect to tor network
+        :return:
+        """
         self.tor_proc = launch_tor_with_config(
             config=self.get_config(self.tor_data_directory_name),
             tor_cmd=self.tor_path,
@@ -117,12 +130,20 @@ class Onion(object):
         self.connected_to_tor = True
 
     def is_authenticated(self):
+        """
+        Check if controller authenticated
+        :return:
+        """
         if self.c is not None:
             return self.c.is_authenticated()
         else:
             return False
 
     def cleanup(self):
+        """
+        Stop tor and clean up (hopefully) all footprints
+        :return:
+        """
         if self.tor_proc:
             try:
                 rendezvous_circuit_ids = []

@@ -6,4 +6,7 @@
 /dragonion/data/
 __pycache__
 
+*.auth
+*.identity
+
 poetry.lock
