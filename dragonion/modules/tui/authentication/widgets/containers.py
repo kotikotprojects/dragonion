@@ -91,8 +91,8 @@ class LoginContainer(Static):
                  validated value
         """
         try:
-            from ..authentication import app
-            app.exit(result=ServiceAuthResult(
+            from ...tui import app
+            app.service_auth = ServiceAuthResult(
                 raw_auth_strings=(
                     (_service_id := self.query_one(
                         '#login_service_id_input',
@@ -102,8 +102,8 @@ class LoginContainer(Static):
                         expect_type=Input).value)
                 ),
                 service_auth_file=self.query_one(Select).value
-            ))
+            )
         except Exception as e:
             assert e
-            from ..authentication import app
+            from ...tui import app
             app.bell()

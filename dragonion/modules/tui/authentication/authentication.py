@@ -1,12 +1,13 @@
-from textual.app import App, ComposeResult
-from textual.widgets import Header
+from textual.app import ComposeResult
+from textual.widgets import Static
 from textual.containers import Center
 from .widgets.containers import LoginContainer
 
 
-class LoginApp(App):
+class LoginWidget(Static):
     DEFAULT_CSS = """
-    LoginApp {
+    LoginWidget {
+        height: 100%;
         layout: vertical;
         align-vertical: middle;
     }
@@ -19,12 +20,9 @@ class LoginApp(App):
     """
 
     def _on_compose(self) -> None:
+        from ..tui import app
         # noinspection PyTypeChecker
-        self.title = 'd'
+        app.title = 'd'
 
     def compose(self) -> ComposeResult:
-        yield Header()
         yield Center(LoginContainer())
-
-
-app = LoginApp()
