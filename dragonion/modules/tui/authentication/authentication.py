@@ -22,7 +22,7 @@ class LoginWidget(Static):
     def _on_compose(self) -> None:
         from ..tui import app
         # noinspection PyTypeChecker
-        app.title = 'd'
+        app.title = 'dragonion - authentication'
 
     def compose(self) -> ComposeResult:
         yield Center(LoginContainer())

@@ -87,8 +87,8 @@ class LoginContainer(Static):
         """
         On auth button press
         :param _:
-        :return: Service auth result where one of params is None, and other has
-                 validated value
+        :return: Modifies global app.service_auth to service auth result where one of
+                 params is None, and other has validated value
         """
         try:
             from ...tui import app
