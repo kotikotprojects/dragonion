@@ -4,7 +4,7 @@ import tarfile
 import requests
 import re
 import sys
-from typing_extensions import Literal
+from typing import Literal
 
 
 def get_latest_version() -> str:
