@@ -1,5 +1,5 @@
 import os
-from .generated_auth.db import AuthFile
+from dragonion_core.proto.file import AuthFile
 
 
 def create_service_auth(
