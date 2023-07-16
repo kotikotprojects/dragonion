@@ -24,7 +24,8 @@ class GenerateIdentityContainer(Static):
             label='Generate identity',
             name='generate_identity_button',
             variant='success',
-            id='generate_identity_button'
+            id='generate_identity_button',
+            disabled=True
         ))
 
     @on(Button.Pressed, "#generate_identity_button")
