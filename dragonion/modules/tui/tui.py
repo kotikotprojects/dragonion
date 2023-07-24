@@ -11,7 +11,9 @@ from .authentication.utils.results import ServiceAuthResult
 
 from .identity import identity
 
-from ..encryption.identity import Identity
+from dragonion_core.proto.encryption.identity import Identity
+
+from ezzthread import threaded
 
 
 class DragonionTuiApp(App):
@@ -45,7 +47,7 @@ class DragonionTuiApp(App):
     async def watch_identity(self):
         if isinstance(self.identity, Identity):
             try:
-                self.identity.generate()
+                threaded(self.identity.generate)()
                 while self.identity.private_key is None:
                     await asyncio.sleep(0.1)
                 await self.query_one(LoadingIndicator).remove()

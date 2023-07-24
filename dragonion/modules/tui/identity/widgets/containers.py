@@ -37,7 +37,7 @@ class GenerateIdentityContainer(Static):
         """
         try:
             from ...tui import app
-            from dragonion.modules.encryption.identity import Identity
+            from dragonion_core.proto.encryption.identity import Identity
 
             app.query_one('IdentityWidget').remove()
             app.mount(LoadingIndicator())
