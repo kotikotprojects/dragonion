@@ -5,15 +5,13 @@ from dragonion_core.proto.file import AuthFile
 def create_service_auth(
         tor_data_directory_name: str,
         service_name: str = None,
-        service_id: str = None,
-        key: str = None
+        auth_strings: tuple[str, str] = None,
 ) -> str:
     """
     Creates .auth_private file to endpoint be accessible
     :param tor_data_directory_name: Current temp directory of tor
     :param service_name: Name of .auth file user got from server hoster
-    :param service_id: Url part without .onion part
-    :param key: base32-encoded key, user got from hoster
+    :param auth_strings: service_id, key
     :return: Returns .onion url of service
     """
     if service_name:
@@ -23,10 +21,10 @@ def create_service_auth(
             f.write(auth['auth'])
 
         return auth['host']
-    elif service_id and key:
+    elif auth_strings[0] and auth_strings[1]:
         with open(os.path.join(os.path.join(tor_data_directory_name, 'auth'),
                                'service.auth_private'), 'w') as f:
-            f.write(f'{service_id}:descriptor:'
-                    f'x25519:{key}')
+            f.write(f'{auth_strings[0]}:descriptor:'
+                    f'x25519:{auth_strings[1]}')
 
-        return f'{service_id}.onion'
+        return f'{auth_strings[1]}.onion'

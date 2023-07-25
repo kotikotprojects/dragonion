@@ -2,7 +2,7 @@ import asyncio
 
 from textual.app import App, ComposeResult
 from textual.reactive import reactive
-from textual.widgets import Header, Static, LoadingIndicator
+from textual.widgets import Header, LoadingIndicator
 from textual.css.query import NoMatches
 
 
@@ -12,6 +12,8 @@ from .authentication.utils.results import ServiceAuthResult
 from .identity import identity
 
 from .chat import chat
+
+from .helpers.storage import UserStorage
 
 from dragonion_core.proto.encryption.identity import Identity
 
@@ -23,6 +25,7 @@ class DragonionTuiApp(App):
     _pre_username = None
     service_auth = reactive(None)
     identity = reactive(None)
+    user_storage = UserStorage()
 
     def compose(self) -> ComposeResult:
         yield Header()
@@ -56,11 +59,16 @@ class DragonionTuiApp(App):
             except NoMatches:
                 pass
 
-            if self.identity and self.service_auth:
+            if self.identity and isinstance(self.service_auth, ServiceAuthResult) \
+                    and len(list(self.query('ChatWidget').results())) == 0:
                 await self.mount(chat.ChatWidget(
                     service_auth=self.service_auth,
                     identity=self.identity
                 ))
+
+    def _on_exit_app(self) -> None:
+        if self.user_storage.onion:
+            self.user_storage.onion.cleanup()
 
 
 app = DragonionTuiApp()

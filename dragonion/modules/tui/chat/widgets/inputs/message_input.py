@@ -34,5 +34,5 @@ class InputContainer(Horizontal):
 
     @on(Button.Pressed, "#chat_input_submit_button")
     @on(Input.Submitted, "#chat_input_field")
-    def on_submit(self):
-        handle_input_submit()
+    async def on_submit(self):
+        await handle_input_submit()

@@ -6,7 +6,8 @@ import os
 import platform
 import re
 import signal
-import subprocess
+import asyncio
+from asyncio import subprocess
 import tempfile
 import threading
 
@@ -19,9 +20,9 @@ NO_TORRC = '<no torrc>'
 DEFAULT_INIT_TIMEOUT = 90
 
 
-def launch_tor(tor_cmd='tor', args=None, torrc_path=None, completion_percent=100,
-               init_msg_handler=None, timeout=DEFAULT_INIT_TIMEOUT,
-               take_ownership=False, close_output=True, stdin=None):
+async def launch_tor(tor_cmd='tor', args=None, torrc_path=None, completion_percent=100,
+                     init_msg_handler=None, timeout=DEFAULT_INIT_TIMEOUT,
+                     take_ownership=False, close_output=True, stdin=None):
     """
     Initializes a tor process. This blocks until initialization completes or we
     error out.
@@ -65,6 +66,8 @@ def launch_tor(tor_cmd='tor', args=None, torrc_path=None, completion_percent=100
     :raises: **OSError** if we either fail to create the tor process or reached a
       timeout without success
     """
+
+    assert close_output
 
     if stem.util.system.is_windows():
         if timeout is not None and timeout != DEFAULT_INIT_TIMEOUT:
@@ -114,8 +117,8 @@ def launch_tor(tor_cmd='tor', args=None, torrc_path=None, completion_percent=100
     tor_process = None
 
     try:
-        tor_process = subprocess.Popen(
-            runtime_args,
+        tor_process = await asyncio.create_subprocess_shell(
+            ' '.join(runtime_args),
             stdout=subprocess.PIPE,
             stdin=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -147,7 +150,8 @@ def launch_tor(tor_cmd='tor', args=None, torrc_path=None, completion_percent=100
             # It seems like python 2.x is perfectly happy for this to be unicode, so
             # normalizing to that.
 
-            init_line = tor_process.stdout.readline().decode('utf-8', 'replace').strip()
+            init_line = (await tor_process.stdout.readline()).decode('utf-8',
+                                                                     'replace').strip()
 
             # this will provide empty results if the process is terminated
 
@@ -178,19 +182,12 @@ def launch_tor(tor_cmd='tor', args=None, torrc_path=None, completion_percent=100
         print(e)
         if tor_process:
             tor_process.kill()  # don't leave a lingering process
-            tor_process.wait()
+            await tor_process.wait()
 
         raise
     finally:
         if timeout:
             signal.alarm(0)  # stop alarm
-
-        if tor_process and close_output:
-            if tor_process.stdout:
-                tor_process.stdout.close()
-
-            if tor_process.stderr:
-                tor_process.stderr.close()
 
         if temp_file:
             try:
@@ -199,9 +196,9 @@ def launch_tor(tor_cmd='tor', args=None, torrc_path=None, completion_percent=100
                 assert e
 
 
-def launch_tor_with_config(config, tor_cmd='tor', completion_percent=100,
-                           init_msg_handler=None, timeout=DEFAULT_INIT_TIMEOUT,
-                           take_ownership=False, close_output=True):
+async def launch_tor_with_config(config, tor_cmd='tor', completion_percent=100,
+                                 init_msg_handler=None, timeout=DEFAULT_INIT_TIMEOUT,
+                                 take_ownership=False, close_output=True):
     """
     Initializes a tor process, like :func:`~stem.process.launch_tor`, but with a
     customized configuration. This writes a temporary torrc to disk, launches
@@ -280,7 +277,7 @@ def launch_tor_with_config(config, tor_cmd='tor', completion_percent=100,
                 config_str += '%s %s\n' % (key, value)
 
     if use_stdin:
-        return launch_tor(
+        return await launch_tor(
             tor_cmd=tor_cmd,
             args=['-f', '-'],
             completion_percent=completion_percent,
@@ -300,8 +297,8 @@ def launch_tor_with_config(config, tor_cmd='tor', completion_percent=100,
             # prevents tor from error-ing out due to a missing torrc if it gets a sighup
             args = ['__ReloadTorrcOnSIGHUP', '0']
 
-            return launch_tor(tor_cmd, args, torrc_path, completion_percent,
-                              init_msg_handler, timeout, take_ownership)
+            return await launch_tor(tor_cmd, args, torrc_path, completion_percent,
+                                    init_msg_handler, timeout, take_ownership)
         finally:
             try:
                 os.close(torrc_descriptor)

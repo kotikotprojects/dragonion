@@ -6,10 +6,11 @@ import socket
 import random
 import os
 import psutil
-import subprocess
 import tempfile
 import platform
 import time
+
+from asyncio import subprocess
 
 from dragonion.utils.core import dirs
 
@@ -34,7 +35,7 @@ class Onion(object):
     tor_socks_port: int
     tor_cookie_auth_file: str
     tor_path: str = dirs.get_tor_paths()
-    tor_proc: subprocess.Popen | None
+    tor_proc: subprocess.Process | None
     connected_to_tor: bool = False
     auth_string: str
     graceful_close_onions: list = list()
@@ -106,16 +107,17 @@ class Onion(object):
 
         return config
 
-    def connect(self):
+    async def connect(self, init_msg_handler=print):
         """
         Connect to tor network
+        :param init_msg_handler: Function that will print logs
         :return:
         """
-        self.tor_proc = launch_tor_with_config(
+        self.tor_proc = await launch_tor_with_config(
             config=self.get_config(self.tor_data_directory_name),
             tor_cmd=self.tor_path,
             take_ownership=True,
-            init_msg_handler=print
+            init_msg_handler=init_msg_handler
         )
 
         time.sleep(2)
@@ -183,14 +185,16 @@ class Onion(object):
             except Exception as e:
                 print(e)
 
-            self.tor_proc.terminate()
-            time.sleep(0.2)
-            if self.tor_proc.poll() is None:
-                try:
-                    self.tor_proc.kill()
-                    time.sleep(0.2)
-                except Exception as e:
-                    print(e)
+            try:
+                self.tor_proc.terminate()
+                time.sleep(0.2)
+            except Exception as e:
+                assert e
+            try:
+                self.tor_proc.kill()
+                time.sleep(0.2)
+            except Exception as e:
+                assert e
             self.tor_proc = None
 
         self.connected_to_tor = False

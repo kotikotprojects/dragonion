@@ -1,2 +1,2 @@
-def handle_message(full_text: str):
+async def handle_message(full_text: str):
     ...

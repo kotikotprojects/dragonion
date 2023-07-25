@@ -1,5 +1,6 @@
 from textual.app import ComposeResult
 from textual.widgets import Static, Label
+from textual import events
 
 from datetime import datetime
 
@@ -38,22 +39,43 @@ class MessageContent(Static):
     DEFAULT_CSS = """
     MessageContent {
         layout: horizontal;
+        width: 1fr;
     }
     
-    .dock-right {
-        dock: right;
+    ._message_content_text {
+        width: auto;
+    }
+    
+    .message_time {
+        margin-left: 3;
     }
     """
 
+    def _on_mount(self, event: events.Mount) -> None:
+        self.query_one('.message_time').visible = False
+
+    def _on_enter(self, event: events.Focus) -> None:
+        self.query_one('.message_time').visible = True
+
+    def _on_leave(self, event: events.Blur) -> None:
+        self.query_one('.message_time').visible = False
+
     def compose(self) -> ComposeResult:
-        yield Static(self.renderable)
+        yield Static(self.renderable, classes='_message_content_text')
         yield Static(
             f"[#a5abb3][{datetime.now().time().strftime('%H:%M:%S')}][/]",
-            classes='dock-right'
+            classes='message_time'
         )
 
 
 class TextMessage(Static):
+    DEFAULT_CSS = """
+    TextMessage {
+        layout: vertical;
+        width: auto;
+    }
+    """
+
     def __init__(self, author: str, message: str):
         self.author = author
         self.message = message

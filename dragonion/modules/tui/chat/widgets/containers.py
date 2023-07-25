@@ -1,8 +1,11 @@
 from textual.containers import ScrollableContainer
 from textual.widget import Widget
 from textual.widgets import Static
-from textual.containers import Center
 from textual import events
+
+from textual.css.query import NoMatches
+
+from .items.message import Message
 
 import textwrap
 
@@ -34,19 +37,25 @@ class MessagesContainer(ScrollableContainer):
             ██║  ██║██╔══██╗██╔══██║██║   ██║██║   ██║██║╚██╗██║██║██║   ██║██║╚██╗██║
             ██████╔╝██║  ██║██║  ██║╚██████╔╝╚██████╔╝██║ ╚████║██║╚██████╔╝██║ ╚████║
             ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+                    Most modern-looking, encrypted and functional in-console
+                                onion chat that you control! 
+            Use /connect command to establish onion connection, than /join to connect 
+                    to room or /help to get list of all available commands          
                 """), classes='dragonion_help_logo'
             ),
-            Static(
-                "Most modern-looking, encrypted and functional in-console onion "
-                "chat that you control! ",
-                classes='dragonion_help_logo'
-            ),
-            Static(
-                "Use [bold]/join[/] to connect to room or [bold]/help[/] to get list "
-                "of all available commands",
-                classes='dragonion_help_logo'
-            )
         )
+
+    def write(self, text: str, classes: str = '', _id: str = None):
+        self.mount(w := Static(text, classes=classes, id=_id))
+        w.scroll_visible(duration=1)
+
+    def mount_scroll(self, widget: Widget):
+        self.mount(widget)
+        widget.scroll_visible(duration=1)
+
+    def mount_scroll_adaptive(self, widget: Widget):
+        self.mount(widget)
+        self.scroll_adaptive_to(widget)
 
     def scroll_adaptive_to(self, widget: Widget):
         """
@@ -56,3 +65,14 @@ class MessagesContainer(ScrollableContainer):
         """
         if self.scroll_offset.y == self.max_scroll_y:
             widget.scroll_visible(duration=1)
+
+    @property
+    def last_message(self) -> Message | None:
+        try:
+            widget = self.query(None).last()
+            if 'message_time' in widget.classes:
+                return self.query(Message).last()
+            else:
+                return None
+        except NoMatches:
+            return None
