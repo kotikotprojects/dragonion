@@ -8,6 +8,13 @@ from dragonion_core.proto.encryption.identity import Identity
 
 
 class ChatWidget(Static):
+    DEFAULT_CSS = """
+    .input {
+        dock: bottom;
+        height: 3;
+    }
+    """
+
     def __init__(
             self,
             service_auth: ServiceAuthResult,

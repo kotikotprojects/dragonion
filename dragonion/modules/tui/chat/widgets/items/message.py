@@ -35,7 +35,22 @@ class MessageHeader(Static):
 
 
 class MessageContent(Static):
-    pass
+    DEFAULT_CSS = """
+    MessageContent {
+        layout: horizontal;
+    }
+    
+    .dock-right {
+        dock: right;
+    }
+    """
+
+    def compose(self) -> ComposeResult:
+        yield Static(self.renderable)
+        yield Static(
+            f"[#a5abb3][{datetime.now().time().strftime('%H:%M:%S')}][/]",
+            classes='dock-right'
+        )
 
 
 class TextMessage(Static):
