@@ -20,7 +20,7 @@ class IdentityWidget(Static):
     """
 
     def _on_compose(self) -> None:
-        from ..tui import app
+        from .. import app
         # noinspection PyTypeChecker
         app.title = 'dragonion - identity'
 

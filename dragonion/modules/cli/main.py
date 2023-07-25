@@ -2,7 +2,7 @@ import click
 
 import os
 
-from ..tui.tui import app
+from ..tui import app
 
 
 def validate_username(_: click.Context, __: click.Parameter, value: str | None):

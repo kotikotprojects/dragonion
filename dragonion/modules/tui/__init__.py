@@ -1,1 +1,1 @@
-pass
+from .tui import app

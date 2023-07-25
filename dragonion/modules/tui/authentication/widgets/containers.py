@@ -91,7 +91,7 @@ class LoginContainer(Static):
                  params is None, and other has validated value
         """
         try:
-            from ...tui import app
+            from ... import app
             app.service_auth = ServiceAuthResult(
                 raw_auth_strings=(
                     (_service_id := self.query_one(
@@ -105,5 +105,5 @@ class LoginContainer(Static):
             )
         except Exception as e:
             assert e
-            from ...tui import app
+            from ... import app
             app.bell()

@@ -30,6 +30,6 @@ class UsernameInputLayout(Static):
 
     @on(Input.Changed, '#username_input')
     def on_username_validate(self, event: Input.Changed):
-        from ...tui import app
+        from ... import app
         app.query_one('#generate_identity_button', expect_type=Button).disabled = \
             not event.validation_result.is_valid

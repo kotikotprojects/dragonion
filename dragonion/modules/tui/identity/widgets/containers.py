@@ -29,6 +29,7 @@ class GenerateIdentityContainer(Static):
         ))
 
     @on(Button.Pressed, "#generate_identity_button")
+    @on(Input.Submitted, "#username_input")
     def on_generate_button_pressed(self, _: Button.Pressed):
         """
         On generate button press
@@ -36,7 +37,7 @@ class GenerateIdentityContainer(Static):
         :return: Modifies global app.identity to generated
         """
         try:
-            from ...tui import app
+            from ... import app
             from dragonion_core.proto.encryption.identity import Identity
 
             app.query_one('IdentityWidget').remove()
@@ -48,5 +49,5 @@ class GenerateIdentityContainer(Static):
                 )
         except Exception as e:
             assert e
-            from ...tui import app
+            from ... import app
             app.bell()

@@ -11,6 +11,8 @@ from .authentication.utils.results import ServiceAuthResult
 
 from .identity import identity
 
+from .chat import chat
+
 from dragonion_core.proto.encryption.identity import Identity
 
 from ezzthread import threaded
@@ -55,8 +57,10 @@ class DragonionTuiApp(App):
                 pass
 
             if self.identity and self.service_auth:
-                await self.mount(Static(str(self.identity)))
-                await self.mount(Static(str(self.service_auth)))
+                await self.mount(chat.ChatWidget(
+                    service_auth=self.service_auth,
+                    identity=self.identity
+                ))
 
 
 app = DragonionTuiApp()
