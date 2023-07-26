@@ -16,14 +16,14 @@ from textual.containers import Center
 
 class AuthVariants(Static):
     DEFAULT_CSS = """
-    Label {
+    .margin-1 {
         margin: 1;
     }
     """
 
     def compose(self) -> ComposeResult:
         yield AuthFileSelect()
-        yield Center(Label('OR'))
+        yield Center(Label('OR', classes='margin-1'))
         yield RawStringsAuthLayout()
 
     @on(Input.Changed)

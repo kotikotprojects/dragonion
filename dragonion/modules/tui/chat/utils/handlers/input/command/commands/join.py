@@ -31,7 +31,6 @@ async def join_command(command_args: list):
     )
 
     connection_message = WebMessage.from_json(await app.user_storage.websocket.recv())
-    log.write(f'Received connection message')
 
     if connection_message.type == "error":
         log.write(

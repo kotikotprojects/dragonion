@@ -29,10 +29,15 @@ class MessageHeader(Static):
     }
     """
 
+    def __init__(self, message: str, time: datetime):
+        self.message = message
+        self.time = time
+        super().__init__()
+
     def compose(self) -> ComposeResult:
-        yield Label(f"[bold]{self.renderable}[/]")
+        yield Label(f"[bold]{self.message}[/]")
         yield Label(" ")
-        yield Label(f"[#a5abb3][{datetime.now().time().strftime('%H:%M:%S')}][/]")
+        yield Label(f"[#a5abb3][{self.time.time().strftime('%H:%M:%S')}][/]")
 
 
 class MessageContent(Static):
@@ -51,6 +56,11 @@ class MessageContent(Static):
     }
     """
 
+    def __init__(self, message: str, time: datetime):
+        self.message = message
+        self.time = time
+        super().__init__()
+
     def _on_mount(self, event: events.Mount) -> None:
         self.query_one('.message_time').visible = False
 
@@ -61,9 +71,9 @@ class MessageContent(Static):
         self.query_one('.message_time').visible = False
 
     def compose(self) -> ComposeResult:
-        yield Static(self.renderable, classes='_message_content_text')
+        yield Static(self.message, classes='_message_content_text')
         yield Static(
-            f"[#a5abb3][{datetime.now().time().strftime('%H:%M:%S')}][/]",
+            f"[#a5abb3][{self.time.time().strftime('%H:%M:%S')}][/]",
             classes='message_time'
         )
 
@@ -76,14 +86,15 @@ class TextMessage(Static):
     }
     """
 
-    def __init__(self, author: str, message: str):
+    def __init__(self, author: str, message: str, time: datetime):
         self.author = author
         self.message = message
+        self.time = time
         super().__init__()
 
     def compose(self) -> ComposeResult:
-        yield MessageHeader(self.author)
-        yield MessageContent(self.message)
+        yield MessageHeader(self.author, self.time)
+        yield MessageContent(self.message, self.time)
 
 
 class Message(Static):
@@ -94,20 +105,23 @@ class Message(Static):
     }
     """
 
-    def __init__(self, avatar: str, author: str, message: str):
+    def __init__(self, avatar: str, author: str, message: str, time: datetime):
         self.avatar = avatar
         self.author = author
         self.message = message
+        self.time = time
         super().__init__()
 
     def compose(self) -> ComposeResult:
         yield Avatar(symb=self.avatar)
         yield TextMessage(
             author=self.author,
-            message=self.message
+            message=self.message,
+            time=self.time
         )
 
-    def add_message(self, message: str):
+    def add_message(self, message: str, time: datetime):
         self.query_one(TextMessage).mount(
-            MessageContent(message)
+            m := MessageContent(message, time)
         )
+        self.app.query_one('MessagesContainer').scroll_adaptive_to(m)

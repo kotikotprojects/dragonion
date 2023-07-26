@@ -45,8 +45,9 @@ class MessagesContainer(ScrollableContainer):
             ),
         )
 
-    def write(self, text: str, classes: str = '', _id: str = None):
-        self.mount(w := Static(text, classes=classes, id=_id))
+    def write(self, text: str, classes: str = '', _id: str = None, no_newline=False):
+        self.mount(w := Static(text + ('\n' if not no_newline else ''),
+                               classes=classes, id=_id))
         w.scroll_visible(duration=1)
 
     def mount_scroll(self, widget: Widget):

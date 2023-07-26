@@ -16,7 +16,7 @@ async def connect_command(command_args: list):
 
     if app.user_storage.onion:
         container.mount(
-            Static('Cleaning up existing onion...', classes='onion_setup_logs')
+            Static('Cleaning up existing onion...\n', classes='onion_setup_logs')
         )
         app.user_storage.onion.cleanup()
 

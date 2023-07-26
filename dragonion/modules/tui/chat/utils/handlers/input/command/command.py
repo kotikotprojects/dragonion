@@ -29,5 +29,5 @@ async def handle_command(full_text: str):
         from dragonion.modules.tui import app
         app.query_one('MessagesContainer').mount_scroll(Static(
             f"[red]Error[/] happened while executing {command}: "
-            f"{result}"
+            f"{result} \n"
         ))

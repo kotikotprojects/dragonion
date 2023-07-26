@@ -12,4 +12,4 @@ async def disconnect_command(command_args: list):
     if onion := app.user_storage.onion:
         onion.cleanup()
 
-    container.mount_scroll(Static("Disconnected from tor"))
+    container.mount_scroll(Static("Disconnected from tor \n"))
