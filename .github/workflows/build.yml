@@ -58,7 +58,12 @@ jobs:
         run: poetry install
 
       - name: Create Package
-        run: poetry build
+        run: poetry build -f wheel
+
+      - name: Upload package to PyPi
+        uses: pypa/gh-action-pypi-publish@v1.8.8
+        with:
+          password: ${{ secrets.PYPI_TOKEN }}
       
       - name: Get package version
         id: version
@@ -117,18 +122,3 @@ jobs:
         with:
           files: dist/*
           fail_on_unmatched_files: true
-
-  Upload-To-PyPi:
-    name: Upload to PyPi
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Check out repo
-        uses: actions/checkout@v3
-      
-      - name: Build and publish to PyPi
-        uses: JRubics/poetry-publish@v1.17
-        with: 
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
-          ignore_dev_requirements: "yes"
-          build_format: "wheel"
