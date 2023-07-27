@@ -2,6 +2,13 @@
 import sys
 from PyInstaller.building.build_main import Analysis, PYZ, EXE
 
+import urllib.request
+
+urllib.request.urlretrieve(
+    'https://github.com/dragonionx/.github/raw/main/dragonion.ico',
+    filename='dragonion.ico'
+)
+
 block_cipher = None
 
 a = Analysis(
@@ -41,4 +48,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon='dragonion.ico'
 )
