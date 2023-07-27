@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dragonion"
-version = "0.1.0"
+version = "0.1.0pre"
 description = ""
 authors = ["BarsTiger <zxcbarstiger@gmail.com>"]
 readme = "README.md"
@@ -17,7 +17,7 @@ sqlitedict = "^2.1.0"
 click = "^8.1.6"
 cryptography = "^41.0.1"
 ezzthread = "^1.0.0"
-dragonion-core = { git = "https://github.com/dragonionx/dragonion-core.git" }
+dragonion-core = "^0.1.0"
 websockets = "^11.0.3"
 pysocks = "^1.7.1"
 
