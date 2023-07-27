@@ -45,14 +45,18 @@ class MessageContent(Static):
     MessageContent {
         layout: horizontal;
         width: 1fr;
+        height: auto;
     }
     
     ._message_content_text {
         width: auto;
+        height: auto;
+        margin-right: 5;
     }
     
     .message_time {
-        margin-left: 3;
+        height: auto;
+        offset-x: -3;
     }
     """
 
@@ -71,7 +75,7 @@ class MessageContent(Static):
         self.query_one('.message_time').visible = False
 
     def compose(self) -> ComposeResult:
-        yield Static(self.message, classes='_message_content_text')
+        yield Static(self.message, classes='_message_content_text', shrink=True)
         yield Static(
             f"[#a5abb3][{self.time.time().strftime('%H:%M:%S')}][/]",
             classes='message_time'
@@ -102,6 +106,7 @@ class Message(Static):
     Message {
         layout: horizontal;
         margin-bottom: 1;
+        height: auto;
     }
     """
 
