@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dragonion"
-version = "0.1.0rc2"
+version = "0.1.0rc3"
 description = ""
 authors = ["BarsTiger <zxcbarstiger@gmail.com>"]
 readme = "README.md"
