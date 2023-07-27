@@ -1,4 +1,3 @@
-from textual.widgets import Static
 from dragonion_core.proto.web.webmessage import WebBroadcastableBuilder
 
 

@@ -72,6 +72,7 @@ class MessagesContainer(ScrollableContainer):
         try:
             widget = self.query(None).last()
             if 'message_time' in widget.classes:
+                # noinspection PyTypeChecker
                 return self.query(Message).last()
             else:
                 return None
