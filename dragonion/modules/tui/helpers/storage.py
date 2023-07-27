@@ -16,3 +16,5 @@ class UserStorage:
     onion: Onion = None
     sock: socksocket = None
     websocket: websockets.client.WebSocketClientProtocol = None
+    connect: bool = False
+    dev_proxy_port: int = None

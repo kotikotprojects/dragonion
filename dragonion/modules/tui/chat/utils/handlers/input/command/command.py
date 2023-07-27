@@ -1,6 +1,8 @@
 from .commands.join import join_command
 from .commands.connect import connect_command
 from .commands.disconnect import disconnect_command
+from .commands.help import help_command
+from .commands.avatar import avatar_command
 
 from textual.widgets import Static
 
@@ -18,9 +20,11 @@ async def handle_command(full_text: str):
 
     try:
         result = await ({
+            '/help': help_command,
             '/join': join_command,
             '/connect': connect_command,
-            '/disconnect': disconnect_command
+            '/disconnect': disconnect_command,
+            '/avatar': avatar_command
         }.get(command, not_found_command)(args))
     except Exception as e:
         result = f'{e.__class__}: {e}'

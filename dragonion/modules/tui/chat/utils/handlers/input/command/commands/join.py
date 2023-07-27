@@ -18,6 +18,15 @@ async def join_command(command_args: list):
         log.write('[red]Error[/]: run /connect command first')
         return
 
+    if app.user_storage.websocket:
+        log.write('[green]Disconnecting from room...[/]')
+        await app.user_storage.websocket.close()
+        await app.user_storage.websocket.wait_closed()
+        app.user_storage.sock.close()
+        from .helpers import socket
+        socket.connect()
+
+    log.write(f'[green]Connecting to {command_args[0]}...')
     app.user_storage.websocket = await websockets.client.connect(
         f'ws://{app.user_storage.host}:80/{command_args[0]}',
         sock=app.user_storage.sock

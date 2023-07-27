@@ -4,7 +4,7 @@ from dragonion_core.proto.web.webmessage import WebBroadcastableBuilder
 async def handle_message(full_text: str):
     from dragonion.modules.tui import app
 
-    if not app.user_storage.websocket:
+    if not app.user_storage.websocket or not app.user_storage.websocket.open:
         app.query_one('MessagesContainer').write(
             f"[red]Error[/]: first connect to onion and join room"
         )

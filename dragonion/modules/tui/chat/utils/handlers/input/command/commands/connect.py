@@ -3,7 +3,7 @@ from textual.widgets import Static
 from dragonion.utils.onion import Onion
 from dragonion.utils.onion.auth import create_service_auth
 
-import socks
+from .helpers import socket
 
 
 async def connect_command(command_args: list):
@@ -19,6 +19,7 @@ async def connect_command(command_args: list):
             Static('Cleaning up existing onion...\n', classes='onion_setup_logs')
         )
         app.user_storage.onion.cleanup()
+        app.user_storage.onion = None
 
     app.user_storage.onion = Onion()
     app.user_storage.host = create_service_auth(
@@ -27,11 +28,12 @@ async def connect_command(command_args: list):
         auth_strings=app.service_auth.raw_auth_strings
     )
 
-    await app.user_storage.onion.connect(
-        init_msg_handler=lambda x: container.mount_scroll(
-            Static(str(x), classes='onion_setup_logs')
+    if not app.user_storage.dev_proxy_port:
+        await app.user_storage.onion.connect(
+            init_msg_handler=lambda x: container.mount_scroll(
+                Static(str(x), classes='onion_setup_logs')
+            )
         )
-    )
 
     container.mount_scroll(
         Static(
@@ -39,14 +41,7 @@ async def connect_command(command_args: list):
             classes='onion_setup_logs'
         )
     )
-    app.user_storage.sock = socks.socksocket()
-    app.user_storage.sock.setproxy(
-        socks.SOCKS5, *app.user_storage.onion.get_tor_socks_port()
-    )
-
-    app.user_storage.sock.connect(
-        (app.user_storage.host, 80)
-    )
+    socket.connect()
 
     container.mount_scroll(Static(f'[green]Connected[/] to onion and authenticated '
                                   f'on {app.user_storage.host}'))

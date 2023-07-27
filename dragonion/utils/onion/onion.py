@@ -39,11 +39,13 @@ class Onion(object):
     connected_to_tor: bool = False
     auth_string: str
     graceful_close_onions: list = list()
-    tor_data_directory = tempfile.TemporaryDirectory(
-        dir=dirs.build_tmp_dir()
-    )
-    tor_data_directory_name = tor_data_directory.name
-    os.makedirs(os.path.join(tor_data_directory_name, 'auth'))
+
+    def __init__(self):
+        self.tor_data_directory = tempfile.TemporaryDirectory(
+            dir=dirs.build_tmp_dir()
+        )
+        self.tor_data_directory_name = self.tor_data_directory.name
+        os.makedirs(os.path.join(self.tor_data_directory_name, 'auth'))
 
     def kill_same_tor(self):
         """

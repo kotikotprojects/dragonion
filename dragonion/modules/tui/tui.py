@@ -65,6 +65,10 @@ class DragonionTuiApp(App):
                     service_auth=self.service_auth,
                     identity=self.identity
                 ))
+                if self.user_storage.connect:
+                    from .chat.utils.handlers.input.command.commands.connect import \
+                        connect_command
+                    await connect_command(list())
 
     def _on_exit_app(self) -> None:
         if self.user_storage.onion:
