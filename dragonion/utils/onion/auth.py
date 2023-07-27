@@ -27,4 +27,4 @@ def create_service_auth(
             f.write(f'{auth_strings[0]}:descriptor:'
                     f'x25519:{auth_strings[1]}')
 
-        return f'{auth_strings[1]}.onion'
+        return f'{auth_strings[0]}.onion'
