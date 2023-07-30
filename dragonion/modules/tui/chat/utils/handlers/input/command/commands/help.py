@@ -56,6 +56,17 @@ async def help_command(command_args: list):
                 'symbol': 'Must be exactly 1 character or not specified, avatar will '
                           'be set to this character.'
             }
+        ),
+        'room': CommandHelp(
+            short_description='Get users',
+            long_description='Will return list of users in your room (you will be in'
+                             'list also)',
+            args_description=None
+        ),
+        'exit': CommandHelp(
+            short_description='Exit chat',
+            long_description='Closes connection and leaves application',
+            args_description=None
         )
     }
 

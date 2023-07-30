@@ -24,7 +24,13 @@ async def join_command(command_args: list):
         await app.user_storage.websocket.wait_closed()
         app.user_storage.sock.close()
         from .helpers import socket
-        socket.connect()
+        from socks import GeneralProxyError
+        try:
+            socket.connect()
+        except GeneralProxyError:
+            log.write(f'Cannot reach service, it may be turned off or you have '
+                      f'irrelevant id-key pair (auth file)')
+            return
 
     log.write(f'[green]Connecting to {command_args[0]}...')
     app.user_storage.websocket = await websockets.client.connect(
@@ -46,7 +52,7 @@ async def join_command(command_args: list):
             f'[red]Error connecting to room[/]: {connection_message.error_message}'
         )
     elif connection_message.type == "connect_answer":
-        app.user_storage.keys |= connection_message.connected_users
+        app.user_storage.keys = connection_message.connected_users
         asyncio.create_task(handle_websocket())
     else:
         log.write(

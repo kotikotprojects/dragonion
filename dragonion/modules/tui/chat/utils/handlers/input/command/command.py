@@ -3,6 +3,8 @@ from .commands.connect import connect_command
 from .commands.disconnect import disconnect_command
 from .commands.help import help_command
 from .commands.avatar import avatar_command
+from .commands.room import room_command
+from .commands.exit import exit_command
 
 from textual.widgets import Static
 
@@ -24,7 +26,9 @@ async def handle_command(full_text: str):
             '/join': join_command,
             '/connect': connect_command,
             '/disconnect': disconnect_command,
-            '/avatar': avatar_command
+            '/avatar': avatar_command,
+            '/room': room_command,
+            '/exit': exit_command
         }.get(command, not_found_command)(args))
     except Exception as e:
         result = f'{e.__class__}: {e}'

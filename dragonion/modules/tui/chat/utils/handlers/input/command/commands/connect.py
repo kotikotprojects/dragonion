@@ -5,6 +5,8 @@ from dragonion.utils.onion.auth import create_service_auth
 
 from .helpers import socket
 
+from socks import GeneralProxyError
+
 
 async def connect_command(command_args: list):
     if command_args:
@@ -41,7 +43,13 @@ async def connect_command(command_args: list):
             classes='onion_setup_logs'
         )
     )
-    socket.connect()
+
+    try:
+        socket.connect()
+    except GeneralProxyError:
+        container.write(f'Cannot reach service, it may be turned off or you have '
+                        f'irrelevant id-key pair (auth file)')
+        return
 
     container.mount_scroll(Static(f'[green]Connected[/] to onion and authenticated '
                                   f'on {app.user_storage.host}'))
