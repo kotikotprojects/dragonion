@@ -28,6 +28,7 @@ contain some functions you would like to have in regular chat application.
 You need to set up [[dragonion-server](https://github.com/dragonionx/dragonion-server)]
 by yourself or using existing server, hosted by your guild/organisation.
 We don't provide any official servers.
+
 ---
 
 ## 🛣️ Usage plan
@@ -112,6 +113,7 @@ Use `/connect` and `/join room password` commands to manage connection. Also, yo
 can get in-application help using `/help` command in chat input. If something is
 unclear, use [[AI](https://chat.collectivai.com/dragonionx/dragonion)] to figure out
 what to do in this situation.
+
 ---
 
 ## 🔧 Configuration guide
