@@ -1,0 +1,35 @@
+Read-Host "This script will install app to $pwd\dragonion. Press Enter to continue or Ctrl+C to cancel"
+if (Test-Path -Path dragonion) {
+    Remove-Item dragonion -Recurse
+}
+
+Write-Output "Downloading embedded core"
+Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.11.4/python-3.11.4-embed-amd64.zip -OutFile python.zip
+
+Write-Output "Unpacking embedded core"
+Expand-Archive python.zip -Force
+Remove-Item python.zip
+
+Write-Output "Configuring embedded core"
+Rename-Item python dragonion
+Remove-Item dragonion/python311._pth
+
+Write-Output "Installing packaging core. This may take a while..."
+Set-Location dragonion
+Invoke-WebRequest -Uri https://bootstrap.pypa.io/get-pip.py -OutFile get-pip.py
+.\python.exe get-pip.py --no-warn-script-location --quiet
+Remove-Item get-pip.py
+
+Write-Output "Downloading application"
+Invoke-WebRequest -Uri https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl -OutFile dragonion-universal-py3-none-any.whl
+
+Write-Output "Installing application and dependencies"
+./Scripts/pip install dragonion-universal-py3-none-any.whl
+Remove-Item dragonion-universal-py3-none-any.whl
+
+Write-Output ""
+Write-Host "Success! " -ForegroundColor Green -NoNewline
+Write-Host "Application is available by running " -NoNewline
+Write-Host "$pwd\Scripts\dragonion " -ForegroundColor Cyan
+
+Set-Location ..
