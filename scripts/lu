@@ -1,0 +1,5 @@
+#!/bin/bash
+source dragonion/bin/activate
+wget https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl --no-verbose
+pip3 install dragonion-universal-py3-none-any.whl
+echo Success! Application is available by running $(pwd)/dragonion/bin/dragonion

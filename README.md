@@ -118,6 +118,18 @@ what to do in this situation.
 
 ## 🔧 Configuration guide
 
+You can use [[pipx](https://pypa.github.io/pipx/)] to install dragonion:
+```commandline
+pipx install dragonion
+```
+Or download pre-built executable:
+- [🪟 Windows](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-win32.exe)
+- [🐧 Linux](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-linux)
+- [🍎 MacOS](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-darwin)
+
+If you are missing something, you use non-x64 (ARM) or Android system or just want to 
+have more installation options, consider checking sections below.
+
 ### Windows
 <details> <summary>
 Windows guide
@@ -155,7 +167,7 @@ traces and is convenient for copying or using.
 <details> <summary>Installation script</summary>
 
 #### Installation script
-This method provides a way to install non-portable, by standalone application, using
+This method provides a way to install non-portable, but standalone application, using
 one installation script
 
 #### Pre-requirements
@@ -387,13 +399,316 @@ Re-download latest version from link above and replace the file.
 
 </details>
 
----
+<details> <summary>Installation script</summary>
+
+#### Installation script
+This method provides a way to install non-portable, but standalone application, using
+one installation script.
+
+#### Pre-requirements
+- `python3` `python3-pip` `python3-venv` `wget`
+
+#### Fresh installation
+- Using your shell, navigate to directory where you want to be dragonion installed. In 
+folder where you will run script, `dragonion` dir will be created.
+- Run:
+```bash
+. <(wget -qO- https://s.kotikot.com/dragonion/l)
+```
+- After running this command, press Enter and wait.
+#### Launch options
+- After installation finishes, script will output full installation path (with 
+executable name). You can paste it in terminal to run dragonion.
+- Also, after installation you will be in dragonion environment, so you can run
+`dragonion` as command. To deactivate it, you can run `deactivate`, and to activate
+again, use `. dragonion/bin/activate`
+- Other option is to copy `dragonion` from `dragonion\bin` somewhere and 
+launch it. But remember, that you cannot move installation dir, app isn't portable.
+
+#### Updating
+- Navigate to directory, where `dragonion` installation dir is located.
+- Run:
+```bash
+. <(wget -qO- https://s.kotikot.com/dragonion/lu)
+```
+
+#### Script mirrors:
+Installation:
+```bash
+. <(wget -qO- https://s.kotikot.com/dragonion/l)
+. <(wget -qO- https://github.com/dragonionx/dragonion/raw/master/scripts/l)
+. <(wget -qO- https://pastebin.com/raw/LdrRBEYB)
+```
+
+Updating:
+```bash
+. <(wget -qO- https://s.kotikot.com/dragonion/lu)
+. <(wget -qO- https://github.com/dragonionx/dragonion/raw/master/scripts/lu)
+. <(wget -qO- https://pastebin.com/raw/XRSA9wUz)
+```
+
+[[Back to Usage guide](#-usage-guide)]
+
+</details>
+
+<details> <summary>Python venv and pip</summary>
+
+#### Python venv and pip
+This method provides a way of installation using python in virtual environment and 
+installing application from repo.
+
+#### Pre-requirements
+- `python3` `python3-pip` `python3-venv`
+- `git`
+
+
+#### Fresh installation
+```commandline
+git clone https://github.com/dragonionx/dragonion
+cd dragonion
+python3 -m venv venv
+. venv\bin\activate
+pip install .
+```
+
+#### Launch options
+- After fresh install, run `dragonion` in environment 
+(or `python3 -m dragonion`)
+- `cd` to app folder, run `. venv\bin\activate`, than `dragonion` in 
+environment (`python3 -m dragonion`)
+- Run `dragonion` from `venv\bin`. You can also copy it anywhere you
+want, but remember that data and config files are saved near executable file
+
+#### Updating
+`cd` to app directory, than 
+```
+git pull
+```
+If there are new changes, run
+```
+. venv\bin\activate
+pip install .
+```
+
+[[Back to Usage guide](#-usage-guide)]
+
+</details>
+
+<details> <summary>Building from .whl</summary>
+
+#### Building from .whl
+This method provides a way of installation using python in virtual environment and 
+installing application from repo.
+
+#### Pre-requirements
+- `python3` `python3-pip` `python3-venv`
+
+#### Fresh installation
+- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+```
+python3 -m venv dragonion
+. dragonion\bin\activate
+pip install dragonion-universal-py3-none-any.whl
+```
+
+#### Launch options
+- After fresh install, run `dragonion` in environment 
+(or `python3 -m dragonion`)
+- `cd` to app folder, run `. dragonion\bin\activate`, than `dragonion` in 
+environment (`python3 -m dragonion`)
+- Run `dragonion` from `dragonion\bin`. You can also copy it anywhere you
+want, but remember that data and config files are saved near executable file
+
+#### Updating
+- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+```
+. dragonion\bin\activate
+pip install dragonion-universal-py3-none-any.whl
+```
+
+[[Back to Usage guide](#-usage-guide)]
+
+</details>
 
 </details>
 
 <details><summary>arm</summary>
 
+#### ARM
+
+Tor does not provide expert bundles for arm systems (except macOS). 
+You need to install `tor` through your package manager, which is indicated in the 
+pre-requirements
+
+<details> <summary>Using pipx</summary>
+
+#### Using pipx
+This method provides a way to install dragonion via pipx. It is very fast way of 
+installation and very convenient for using.
+
+#### Pre-requirements
+- `python3`, `python3-pip`, `python3-venv`
+- `tor`
+
+#### Fresh installation
+- Install pipx and relaunch shell
+```commandline
+pip install pipx --user
+python3 -m pipx ensurepath
+```
+- Install dragonion
+```commandline
+pipx install dragonion
+```
+
+#### Launch options
+- Run `dragonion` in terminal
+
+#### Updating
+```powershell
+pipx upgrade dragonion
+```
+
+[[Back to Usage guide](#-usage-guide)]
+
 </details>
+
+<details> <summary>Installation script</summary>
+
+#### Installation script
+This method provides a way to install non-portable, but standalone application, using
+one installation script.
+
+#### Pre-requirements
+- `python3` `python3-pip` `python3-venv` `wget`
+- `tor`
+
+#### Fresh installation
+- Using your shell, navigate to directory where you want to be dragonion installed. In 
+folder where you will run script, `dragonion` dir will be created.
+- Run:
+```bash
+. <(wget -qO- https://s.kotikot.com/dragonion/l)
+```
+- After running this command, press Enter and wait.
+#### Launch options
+- After installation finishes, script will output full installation path (with 
+executable name). You can paste it in terminal to run dragonion.
+- Also, after installation you will be in dragonion environment, so you can run
+`dragonion` as command. To deactivate it, you can run `deactivate`, and to activate
+again, use `. dragonion/bin/activate`
+- Other option is to copy `dragonion` from `dragonion\bin` somewhere and 
+launch it. But remember, that you cannot move installation dir, app isn't portable.
+
+#### Updating
+- Navigate to directory, where `dragonion` installation dir is located.
+- Run:
+```bash
+. <(wget -qO- https://s.kotikot.com/dragonion/lu)
+```
+
+#### Script mirrors:
+Installation:
+```bash
+. <(wget -qO- https://s.kotikot.com/dragonion/l)
+. <(wget -qO- https://github.com/dragonionx/dragonion/raw/master/scripts/l)
+. <(wget -qO- https://pastebin.com/raw/LdrRBEYB)
+```
+
+Updating:
+```bash
+. <(wget -qO- https://s.kotikot.com/dragonion/lu)
+. <(wget -qO- https://github.com/dragonionx/dragonion/raw/master/scripts/lu)
+. <(wget -qO- https://pastebin.com/raw/XRSA9wUz)
+```
+
+[[Back to Usage guide](#-usage-guide)]
+
+</details>
+
+<details> <summary>Python venv and pip</summary>
+
+#### Python venv and pip
+This method provides a way of installation using python in virtual environment and 
+installing application from repo.
+
+#### Pre-requirements
+- `python3` `python3-pip` `python3-venv`
+- `git`
+- `tor`
+
+
+#### Fresh installation
+```commandline
+git clone https://github.com/dragonionx/dragonion
+cd dragonion
+python3 -m venv venv
+. venv\bin\activate
+pip install .
+```
+
+#### Launch options
+- After fresh install, run `dragonion` in environment 
+(or `python3 -m dragonion`)
+- `cd` to app folder, run `. venv\bin\activate`, than `dragonion` in 
+environment (`python3 -m dragonion`)
+- Run `dragonion` from `venv\bin`. You can also copy it anywhere you
+want, but remember that data and config files are saved near executable file
+
+#### Updating
+`cd` to app directory, than 
+```
+git pull
+```
+If there are new changes, run
+```
+. venv\bin\activate
+pip install .
+```
+
+[[Back to Usage guide](#-usage-guide)]
+
+</details>
+
+<details> <summary>Building from .whl</summary>
+
+#### Building from .whl
+This method provides a way of installation using python in virtual environment and 
+installing application from repo.
+
+#### Pre-requirements
+- `python3` `python3-pip` `python3-venv`
+- `tor`
+
+#### Fresh installation
+- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+```
+python3 -m venv dragonion
+. dragonion\bin\activate
+pip install dragonion-universal-py3-none-any.whl
+```
+
+#### Launch options
+- After fresh install, run `dragonion` in environment 
+(or `python3 -m dragonion`)
+- `cd` to app folder, run `. dragonion\bin\activate`, than `dragonion` in 
+environment (`python3 -m dragonion`)
+- Run `dragonion` from `dragonion\bin`. You can also copy it anywhere you
+want, but remember that data and config files are saved near executable file
+
+#### Updating
+- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+```
+. dragonion\bin\activate
+pip install dragonion-universal-py3-none-any.whl
+```
+
+[[Back to Usage guide](#-usage-guide)]
+
+</details>
+
+</details>
+
 </details>
 
 ### MacOS
@@ -401,12 +716,209 @@ Re-download latest version from link above and replace the file.
 MacOS guide
 </summary>
 
+<details> <summary>Using pipx</summary>
+
+#### Using pipx
+This method provides a way to install dragonion via pipx. It is very fast way of 
+installation and very convenient for using.
+
+#### Pre-requirements
+- `python3`, `python3-pip`, `python3-venv`
+
+#### Fresh installation
+- Install pipx and relaunch shell
+```commandline
+brew install pipx
+pipx ensurepath
+```
+- Install dragonion
+```commandline
+pipx install dragonion
+```
+
+#### Launch options
+- Run `dragonion` in terminal
+
+#### Updating
+```powershell
+pipx upgrade dragonion
+```
+
+[[Back to Usage guide](#-usage-guide)]
+
+</details>
+
+<details> <summary>Single standalone executable</summary>
+
+#### Single standalone executable
+This method provides the ability to download a single executable file that leaves no 
+traces and is convenient for copying or using.
+
+#### Pre-requirements
+- No special requirements found on regular distros
+
+#### Fresh installation
+- [[Download latest version](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-darwin)]
+- Copy file in any folder and locate `.auth` files in that folder
+
+#### Launch options
+- Run from commandline `dragonion-darwin`, `.auth` files should be located in workdir
+
+#### Updating
+Re-download latest version from link above and replace the file.
+
+[[Back to Usage guide](#-usage-guide)]
+
+</details>
+
+<details> <summary>Installation script</summary>
+
+#### Installation script
+This method provides a way to install non-portable, but standalone application, using
+one installation script.
+
+#### Pre-requirements
+- `python3` `python3-pip` `python3-venv` `wget` `curl`
+
+#### Fresh installation
+- Using your shell, navigate to directory where you want to be dragonion installed. In 
+folder where you will run script, `dragonion` dir will be created.
+- Run:
+```bash
+bash <(curl -sL https://s.kotikot.com/dragonion/m)
+```
+- After running this command, press Enter and wait.
+#### Launch options
+- After installation finishes, script will output full installation path (with 
+executable name). You can paste it in terminal to run dragonion.
+- Also, after installation you will be in dragonion environment, so you can run
+`dragonion` as command. To deactivate it, you can run `deactivate`, and to activate
+again, use `. dragonion/bin/activate`
+- Other option is to copy `dragonion` from `dragonion\bin` somewhere and 
+launch it. But remember, that you cannot move installation dir, app isn't portable.
+
+#### Updating
+- Navigate to directory, where `dragonion` installation dir is located.
+- Run:
+```bash
+bash <(curl -sL https://s.kotikot.com/dragonion/lu)
+```
+
+#### Script mirrors:
+Installation:
+```bash
+bash <(curl -sL https://s.kotikot.com/dragonion/m)
+bash <(curl -sL https://github.com/dragonionx/dragonion/raw/master/scripts/m)
+bash <(curl -sL https://pastebin.com/raw/4whxpEFD)
+```
+
+Updating:
+```bash
+bash <(curl -sL https://s.kotikot.com/dragonion/mu)
+bash <(curl -sL https://github.com/dragonionx/dragonion/raw/master/scripts/mu)
+bash <(curl -sL https://pastebin.com/raw/DkPhhTyv)
+```
+
+[[Back to Usage guide](#-usage-guide)]
+
+</details>
+
+<details> <summary>Python venv and pip</summary>
+
+#### Python venv and pip
+This method provides a way of installation using python in virtual environment and 
+installing application from repo.
+
+#### Pre-requirements
+- `python3` `python3-pip` `python3-venv`
+- `git`
+
+
+#### Fresh installation
+```commandline
+git clone https://github.com/dragonionx/dragonion
+cd dragonion
+python3 -m venv venv
+. venv\bin\activate
+pip install .
+```
+
+#### Launch options
+- After fresh install, run `dragonion` in environment 
+(or `python3 -m dragonion`)
+- `cd` to app folder, run `. venv\bin\activate`, than `dragonion` in 
+environment (`python3 -m dragonion`)
+- Run `dragonion` from `venv\bin`. You can also copy it anywhere you
+want, but remember that data and config files are saved near executable file
+
+#### Updating
+`cd` to app directory, than 
+```
+git pull
+```
+If there are new changes, run
+```
+. venv\bin\activate
+pip install .
+```
+
+[[Back to Usage guide](#-usage-guide)]
+
+</details>
+
+<details> <summary>Building from .whl</summary>
+
+#### Building from .whl
+This method provides a way of installation using python in virtual environment and 
+installing application from repo.
+
+#### Pre-requirements
+- `python3` `python3-pip` `python3-venv`
+
+#### Fresh installation
+- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+```
+python3 -m venv dragonion
+. dragonion\bin\activate
+pip install dragonion-universal-py3-none-any.whl
+```
+
+#### Launch options
+- After fresh install, run `dragonion` in environment 
+(or `python3 -m dragonion`)
+- `cd` to app folder, run `. dragonion\bin\activate`, than `dragonion` in 
+environment (`python3 -m dragonion`)
+- Run `dragonion` from `dragonion\bin`. You can also copy it anywhere you
+want, but remember that data and config files are saved near executable file
+
+#### Updating
+- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+```
+. dragonion\bin\activate
+pip install dragonion-universal-py3-none-any.whl
+```
+
+[[Back to Usage guide](#-usage-guide)]
+
+</details>
+
 </details>
 
 ### Android
 <details><summary>
 Termux guide
 </summary>
+
+Due to the nature of Termux, installation can be a little tricky, so we have simplified 
+the installation process for you by creating a specific pre-requirements termux guide.
+
+```
+pkg install python python-pip libexpat git rust binutils tor
+pkg upgrade
+```
+Now, navigate to [[guide for Linux ARM systems](#arm)] 
+([Linux](#linux) -> arm) and choose desired installation
+way. They all apply for termux also if pre-requirements above are installed.
 
 </details>
 
