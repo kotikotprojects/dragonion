@@ -6,17 +6,13 @@ that **you** control!
 
 ## 📜 Table of Contents
 
-<!-- TOC -->
-
 * [🐲 dragonion](#-dragonion)
-    * [📜 Table of Contents](#-table-of-contents)
-    * [📝 Note](#-note)
-    * [🛣️ Usage plan](#-usage-plan)
-    * [💻 Usage guide](#-usage-guide)
-    * [🔧 Configuration guide](#-configuration-guide)
-    * [📃 Credits](#-credits)
-
-<!-- TOC -->
+  * [📜 Table of Contents](#-table-of-contents)
+  * [📝 Note](#-note)
+  * [🛣️ Usage plan](#-usage-plan)
+  * [💻 Usage guide](#-usage-guide)
+  * [🔧 Configuration guide](#-configuration-guide)
+  * [📃 Credits](#-credits)
 
 ---
 
