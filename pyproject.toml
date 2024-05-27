@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dragonion"
-version = "1.0.1"
+version = "1.0.2"
 description = "Most modern-looking, encrypted and functional in-console onion chat that you control!"
 authors = ["BarsTiger <zxcbarstiger@gmail.com>"]
 readme = "README.md"
