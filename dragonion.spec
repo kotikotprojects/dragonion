@@ -5,7 +5,7 @@ from PyInstaller.building.build_main import Analysis, PYZ, EXE
 import urllib.request
 
 urllib.request.urlretrieve(
-    'https://github.com/dragonionx/.github/raw/main/dragonion.ico',
+    'https://github.com/kotikotprojects/.github/raw/main/dragonion.ico',
     filename='dragonion.ico'
 )
 

@@ -21,7 +21,7 @@ that **you** control!!
 dragonion IS NOT a chat for everyday use. It is **specific** application focused on
 **privacy** and **safety**. It can contain functions, that you won't like or don't
 contain some functions you would like to have in regular chat application.
-You need to set up [[dragonion-server](https://github.com/dragonionx/dragonion-server)]
+You need to set up [[dragonion-server](https://github.com/kotikotprojects/dragonion-server)]
 by yourself or using existing server, hosted by your guild/organisation.
 We don't provide any official servers.
 
@@ -37,7 +37,7 @@ We don't provide any official servers.
    recommended)
 5. Make sure you have access to an up-to-date service provided by an administrator or
    friends, or run your own personal service using the
-   [[dragonion-server](https://github.com/dragonionx/dragonion-server)]
+   [[dragonion-server](https://github.com/kotikotprojects/dragonion-server)]
 6. Install pre-requirements, install app, run it,
    checking [[💻 Usage guide](#-usage-guide)] if needed
 
@@ -49,7 +49,7 @@ To use dragonion-server, you need to install it first. To do this, you can visit
 [[Configuration guide](#-configuration-guide)].
 
 If you have questions that are not described in the documentation, you can chat with
-[[AI based on this repository](https://chat.collectivai.com/dragonionx/dragonion)]
+[[AI based on this repository](https://chat.collectivai.com/kotikotprojects/dragonion)]
 
 dragonion is **textual** application. It means, that it works **entirely** in the
 terminal, while having a **modern design** and user experience that does not differ
@@ -76,12 +76,12 @@ each of these situations.
 If not, you will most likely have to start the server yourself.
 It doesn't require any special programming or computer skills, but it can be a little
 more difficult than starting a chat.
-Check [[dragonion-server](https://github.com/dragonionx/dragonion-server)] page to get
+Check [[dragonion-server](https://github.com/kotikotprojects/dragonion-server)] page to get
 more information about starting your own dragonion service.
 
 After you have received the options for authentication, you need to install dragonion.
 To do this, you can use the [[🔧 Configuration guide](#-configuration-guide)] or ask
-a question to [[AI](https://chat.collectivai.com/dragonionx/dragonion)],
+a question to [[AI](https://chat.collectivai.com/kotikotprojects/dragonion)],
 specifying your platform and choosing the appropriate installation method for yourself.
 
 With the program installed, you can proceed to launch and authenticate. If you have
@@ -92,7 +92,7 @@ fields at startup.
 
 Start app using `dragonion` command or running executable, you will see user-friendly
 interface. Remember, that if you do not understand any part of the interface,
-you can always ask [[AI](https://chat.collectivai.com/dragonionx/dragonion)] for help.
+you can always ask [[AI](https://chat.collectivai.com/kotikotprojects/dragonion)] for help.
 
 dragonion also has cli options to automate startup.
 
@@ -107,7 +107,7 @@ dragonion also has cli options to automate startup.
 
 Use `/connect` and `/join room password` commands to manage connection. Also, you
 can get in-application help using `/help` command in chat input. If something is
-unclear, use [[AI](https://chat.collectivai.com/dragonionx/dragonion)] to figure out
+unclear, use [[AI](https://chat.collectivai.com/kotikotprojects/dragonion)] to figure out
 what to do in this situation.
 
 ---
@@ -119,9 +119,9 @@ You can use [[pipx](https://pypa.github.io/pipx/)] to install dragonion:
 pipx install dragonion
 ```
 Or download pre-built executable:
-- [🪟 Windows](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-win32.exe)
-- [🐧 Linux](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-linux)
-- [🍎 MacOS](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-darwin)
+- [🪟 Windows](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-win32.exe)
+- [🐧 Linux](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-linux)
+- [🍎 MacOS](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-darwin)
 
 If you are missing something, you use non-x64 (ARM) or Android system or just want to 
 have more installation options, consider checking sections below.
@@ -145,7 +145,7 @@ traces and is convenient for copying or using.
   [[install it from Microsoft Store](https://aka.ms/terminal)]
 
 #### Fresh installation
-- [[Download latest version](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-win32.exe)]
+- [[Download latest version](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-win32.exe)]
 - Copy file in any folder and locate `.auth` files in that folder
 
 #### Launch options
@@ -196,14 +196,14 @@ iwr https://s.kotikot.com/dragonion/wu | iex
 Installation:
 ```powershell
 iwr https://s.kotikot.com/dragonion/w | iex
-iwr https://github.com/dragonionx/dragonion/raw/master/scripts/w | iex
+iwr https://github.com/kotikotprojects/dragonion/raw/master/scripts/w | iex
 iwr https://pastebin.com/raw/ix3LtZqj | iex
 ```
 
 Updating:
 ```powershell
 iwr https://s.kotikot.com/dragonion/wu | iex
-iwr https://github.com/dragonionx/dragonion/raw/master/scripts/wu | iex
+iwr https://github.com/kotikotprojects/dragonion/raw/master/scripts/wu | iex
 iwr https://pastebin.com/raw/Z28JDDMi | iex
 ```
 
@@ -260,7 +260,7 @@ installing application from repo.
 
 #### Fresh installation
 ```commandline
-git clone https://github.com/dragonionx/dragonion
+git clone https://github.com/kotikotprojects/dragonion
 cd dragonion
 python -m venv venv
 venv\Scripts\activate
@@ -302,7 +302,7 @@ installing application from repo.
   [[install it from Microsoft Store](https://aka.ms/terminal)]
 
 #### Fresh installation
-- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+- Download [[latest wheel](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
 ```commandline
 python -m venv dragonion
 dragonion\Scripts\activate
@@ -318,7 +318,7 @@ environment (`python -m dragonion`)
 want, but remember that data and config files are saved near executable file
 
 #### Updating
-- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+- Download [[latest wheel](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
 ```commandline
 dragonion\Scripts\activate
 pip install dragonion-universal-py3-none-any.whl
@@ -382,7 +382,7 @@ traces and is convenient for copying or using.
 - No special requirements found on regular distros
 
 #### Fresh installation
-- [[Download latest version](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-linux)]
+- [[Download latest version](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-linux)]
 - Copy file in any folder and locate `.auth` files in that folder
 
 #### Launch options
@@ -432,14 +432,14 @@ launch it. But remember, that you cannot move installation dir, app isn't portab
 Installation:
 ```bash
 . <(wget -qO- https://s.kotikot.com/dragonion/l)
-. <(wget -qO- https://github.com/dragonionx/dragonion/raw/master/scripts/l)
+. <(wget -qO- https://github.com/kotikotprojects/dragonion/raw/master/scripts/l)
 . <(wget -qO- https://pastebin.com/raw/LdrRBEYB)
 ```
 
 Updating:
 ```bash
 . <(wget -qO- https://s.kotikot.com/dragonion/lu)
-. <(wget -qO- https://github.com/dragonionx/dragonion/raw/master/scripts/lu)
+. <(wget -qO- https://github.com/kotikotprojects/dragonion/raw/master/scripts/lu)
 . <(wget -qO- https://pastebin.com/raw/XRSA9wUz)
 ```
 
@@ -460,7 +460,7 @@ installing application from repo.
 
 #### Fresh installation
 ```commandline
-git clone https://github.com/dragonionx/dragonion
+git clone https://github.com/kotikotprojects/dragonion
 cd dragonion
 python3 -m venv venv
 . venv\bin\activate
@@ -500,7 +500,7 @@ installing application from repo.
 - `python3` `python3-pip` `python3-venv`
 
 #### Fresh installation
-- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+- Download [[latest wheel](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
 ```
 python3 -m venv dragonion
 . dragonion\bin\activate
@@ -516,7 +516,7 @@ environment (`python3 -m dragonion`)
 want, but remember that data and config files are saved near executable file
 
 #### Updating
-- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+- Download [[latest wheel](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
 ```
 . dragonion\bin\activate
 pip install dragonion-universal-py3-none-any.whl
@@ -607,14 +607,14 @@ launch it. But remember, that you cannot move installation dir, app isn't portab
 Installation:
 ```bash
 . <(wget -qO- https://s.kotikot.com/dragonion/l)
-. <(wget -qO- https://github.com/dragonionx/dragonion/raw/master/scripts/l)
+. <(wget -qO- https://github.com/kotikotprojects/dragonion/raw/master/scripts/l)
 . <(wget -qO- https://pastebin.com/raw/LdrRBEYB)
 ```
 
 Updating:
 ```bash
 . <(wget -qO- https://s.kotikot.com/dragonion/lu)
-. <(wget -qO- https://github.com/dragonionx/dragonion/raw/master/scripts/lu)
+. <(wget -qO- https://github.com/kotikotprojects/dragonion/raw/master/scripts/lu)
 . <(wget -qO- https://pastebin.com/raw/XRSA9wUz)
 ```
 
@@ -636,7 +636,7 @@ installing application from repo.
 
 #### Fresh installation
 ```commandline
-git clone https://github.com/dragonionx/dragonion
+git clone https://github.com/kotikotprojects/dragonion
 cd dragonion
 python3 -m venv venv
 . venv\bin\activate
@@ -677,7 +677,7 @@ installing application from repo.
 - `tor`
 
 #### Fresh installation
-- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+- Download [[latest wheel](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
 ```
 python3 -m venv dragonion
 . dragonion\bin\activate
@@ -693,7 +693,7 @@ environment (`python3 -m dragonion`)
 want, but remember that data and config files are saved near executable file
 
 #### Updating
-- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+- Download [[latest wheel](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
 ```
 . dragonion\bin\activate
 pip install dragonion-universal-py3-none-any.whl
@@ -754,7 +754,7 @@ traces and is convenient for copying or using.
 - No special requirements found on regular distros
 
 #### Fresh installation
-- [[Download latest version](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-darwin)]
+- [[Download latest version](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-darwin)]
 - Copy file in any folder and locate `.auth` files in that folder
 
 #### Launch options
@@ -804,14 +804,14 @@ bash <(curl -sL https://s.kotikot.com/dragonion/lu)
 Installation:
 ```bash
 bash <(curl -sL https://s.kotikot.com/dragonion/m)
-bash <(curl -sL https://github.com/dragonionx/dragonion/raw/master/scripts/m)
+bash <(curl -sL https://github.com/kotikotprojects/dragonion/raw/master/scripts/m)
 bash <(curl -sL https://pastebin.com/raw/4whxpEFD)
 ```
 
 Updating:
 ```bash
 bash <(curl -sL https://s.kotikot.com/dragonion/mu)
-bash <(curl -sL https://github.com/dragonionx/dragonion/raw/master/scripts/mu)
+bash <(curl -sL https://github.com/kotikotprojects/dragonion/raw/master/scripts/mu)
 bash <(curl -sL https://pastebin.com/raw/DkPhhTyv)
 ```
 
@@ -832,7 +832,7 @@ installing application from repo.
 
 #### Fresh installation
 ```commandline
-git clone https://github.com/dragonionx/dragonion
+git clone https://github.com/kotikotprojects/dragonion
 cd dragonion
 python3 -m venv venv
 . venv\bin\activate
@@ -872,7 +872,7 @@ installing application from repo.
 - `python3` `python3-pip` `python3-venv`
 
 #### Fresh installation
-- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+- Download [[latest wheel](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
 ```
 python3 -m venv dragonion
 . dragonion\bin\activate
@@ -888,7 +888,7 @@ environment (`python3 -m dragonion`)
 want, but remember that data and config files are saved near executable file
 
 #### Updating
-- Download [[latest wheel](https://github.com/dragonionx/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
+- Download [[latest wheel](https://github.com/kotikotprojects/dragonion/releases/latest/download/dragonion-universal-py3-none-any.whl)]
 ```
 . dragonion\bin\activate
 pip install dragonion-universal-py3-none-any.whl
