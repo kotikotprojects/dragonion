@@ -1,7 +1,7 @@
 from textual import on
 from textual.app import ComposeResult
 from textual.containers import Horizontal
-from textual.widgets import Input, Button
+from textual.widgets import Button, Input
 
 from ...utils.handlers.input.general import handle_input_submit
 
@@ -21,15 +21,12 @@ class InputContainer(Horizontal):
     def compose(self) -> ComposeResult:
         self.classes = "input"
 
-        yield Input(
-            classes="input_field",
-            id="chat_input_field"
-        )
+        yield Input(classes="input_field", id="chat_input_field")
         yield Button(
             ">",
             classes="input_submit",
             variant="primary",
-            id="chat_input_submit_button"
+            id="chat_input_submit_button",
         )
 
     @on(Button.Pressed, "#chat_input_submit_button")

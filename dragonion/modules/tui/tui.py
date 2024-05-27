@@ -1,23 +1,17 @@
 import asyncio
 
+from dragonion_core.proto.encryption.identity import Identity
+from ezzthread import threaded
 from textual.app import App, ComposeResult
+from textual.css.query import NoMatches
 from textual.reactive import reactive
 from textual.widgets import Header, LoadingIndicator
-from textual.css.query import NoMatches
-
 
 from .authentication import authentication
 from .authentication.utils.results import ServiceAuthResult
-
-from .identity import identity
-
 from .chat import chat
-
 from .helpers.storage import UserStorage
-
-from dragonion_core.proto.encryption.identity import Identity
-
-from ezzthread import threaded
+from .identity import identity
 
 
 class DragonionTuiApp(App):
@@ -59,15 +53,21 @@ class DragonionTuiApp(App):
             except NoMatches:
                 pass
 
-            if self.identity and isinstance(self.service_auth, ServiceAuthResult) \
-                    and len(list(self.query('ChatWidget').results())) == 0:
-                await self.mount(chat.ChatWidget(
-                    service_auth=self.service_auth,
-                    identity=self.identity
-                ))
+            if (
+                self.identity
+                and isinstance(self.service_auth, ServiceAuthResult)
+                and len(list(self.query("ChatWidget").results())) == 0
+            ):
+                await self.mount(
+                    chat.ChatWidget(
+                        service_auth=self.service_auth, identity=self.identity
+                    )
+                )
                 if self.user_storage.connect:
-                    from .chat.utils.handlers.input.command.commands.connect import \
-                        connect_command
+                    from .chat.utils.handlers.input.command.commands.connect import (
+                        connect_command,
+                    )
+
                     await connect_command(list())
 
     def _on_exit_app(self) -> None:

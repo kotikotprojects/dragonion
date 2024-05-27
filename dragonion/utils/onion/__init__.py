@@ -1,5 +1,3 @@
 from .onion import Onion
 
-__all__ = [
-    'Onion'
-]
+__all__ = ["Onion"]

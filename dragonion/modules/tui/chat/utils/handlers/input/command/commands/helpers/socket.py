@@ -11,9 +11,7 @@ def connect():
         )
     else:
         app.user_storage.sock.setproxy(
-            socks.SOCKS5, '127.0.0.1', app.user_storage.dev_proxy_port
+            socks.SOCKS5, "127.0.0.1", app.user_storage.dev_proxy_port
         )
 
-    app.user_storage.sock.connect(
-        (app.user_storage.host, 80)
-    )
+    app.user_storage.sock.connect((app.user_storage.host, 80))

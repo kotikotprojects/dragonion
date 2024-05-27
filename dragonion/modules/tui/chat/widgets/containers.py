@@ -1,13 +1,12 @@
+import textwrap
+
+from textual import events
 from textual.containers import ScrollableContainer
+from textual.css.query import NoMatches
 from textual.widget import Widget
 from textual.widgets import Static
-from textual import events
-
-from textual.css.query import NoMatches
 
 from .items.message import Message
-
-import textwrap
 
 
 class MessagesContainer(ScrollableContainer):
@@ -30,7 +29,8 @@ class MessagesContainer(ScrollableContainer):
     def _on_mount(self, event: events.Mount) -> None:
         self.mount(
             Static(
-                textwrap.dedent("""\
+                textwrap.dedent(
+                    """\
             ██████╗ ██████╗  █████╗  ██████╗  ██████╗ ███╗   ██╗██╗ ██████╗ ███╗   ██╗
             ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔═══██╗████╗  ██║██║██╔═══██╗████╗  ██║
             ██║  ██║██████╔╝███████║██║  ███╗██║   ██║██╔██╗ ██║██║██║   ██║██╔██╗ ██║
@@ -41,13 +41,21 @@ class MessagesContainer(ScrollableContainer):
                                 onion chat that you control! 
             Use /connect command to establish onion connection, than /join to connect 
                     to room or /help to get list of all available commands          
-                """), classes='dragonion_help_logo'
+                """
+                ),
+                classes="dragonion_help_logo",
             ),
         )
 
-    def write(self, text: str, classes: str = '', _id: str = None, no_newline=False):
-        self.mount(w := Static(text + ('\n' if not no_newline else ''),
-                               classes=classes, id=_id, shrink=True))
+    def write(self, text: str, classes: str = "", _id: str = None, no_newline=False):
+        self.mount(
+            w := Static(
+                text + ("\n" if not no_newline else ""),
+                classes=classes,
+                id=_id,
+                shrink=True,
+            )
+        )
         w.scroll_visible(duration=1)
 
     def mount_scroll(self, widget: Widget):
@@ -71,7 +79,7 @@ class MessagesContainer(ScrollableContainer):
     def last_message(self) -> Message | None:
         try:
             widget = self.query(None).last()
-            if 'message_time' in widget.classes:
+            if "message_time" in widget.classes:
                 # noinspection PyTypeChecker
                 return self.query(Message).last()
             else:

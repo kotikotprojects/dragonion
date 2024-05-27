@@ -1,11 +1,12 @@
 import os
+
 from dragonion_core.proto.file import AuthFile
 
 
 def create_service_auth(
-        tor_data_directory_name: str,
-        service_name: str = None,
-        auth_strings: tuple[str, str] = None,
+    tor_data_directory_name: str,
+    service_name: str = None,
+    auth_strings: tuple[str, str] = None,
 ) -> str:
     """
     Creates .auth_private file to endpoint be accessible
@@ -16,15 +17,22 @@ def create_service_auth(
     """
     if service_name:
         auth = AuthFile(service_name)
-        with open(os.path.join(os.path.join(tor_data_directory_name, 'auth'),
-                               'service.auth_private'), 'w') as f:
-            f.write(auth['auth'])
+        with open(
+            os.path.join(
+                os.path.join(tor_data_directory_name, "auth"), "service.auth_private"
+            ),
+            "w",
+        ) as f:
+            f.write(auth["auth"])
 
-        return auth['host']
+        return auth["host"]
     elif auth_strings[0] and auth_strings[1]:
-        with open(os.path.join(os.path.join(tor_data_directory_name, 'auth'),
-                               'service.auth_private'), 'w') as f:
-            f.write(f'{auth_strings[0]}:descriptor:'
-                    f'x25519:{auth_strings[1]}')
+        with open(
+            os.path.join(
+                os.path.join(tor_data_directory_name, "auth"), "service.auth_private"
+            ),
+            "w",
+        ) as f:
+            f.write(f"{auth_strings[0]}:descriptor:" f"x25519:{auth_strings[1]}")
 
-        return f'{auth_strings[0]}.onion'
+        return f"{auth_strings[0]}.onion"

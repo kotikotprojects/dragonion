@@ -1,6 +1,6 @@
 async def exit_command(command_args: list):
     if command_args:
-        return 'this command doesn\'t accepts any arguments'
+        return "this command doesn't accepts any arguments"
 
     from dragonion.modules.tui import app
 

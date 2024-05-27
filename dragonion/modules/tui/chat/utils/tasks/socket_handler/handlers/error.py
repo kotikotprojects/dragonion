@@ -1,7 +1,8 @@
-from dragonion.modules.tui.chat.widgets.containers import MessagesContainer
-from .helpers import render_time
-
 from dragonion_core.proto.web.webmessage import WebErrorMessage
+
+from dragonion.modules.tui.chat.widgets.containers import MessagesContainer
+
+from .helpers import render_time
 
 
 async def handle_error(webmessage: WebErrorMessage):
@@ -10,6 +11,5 @@ async def handle_error(webmessage: WebErrorMessage):
     container = app.query_one(MessagesContainer)
 
     container.write(
-        f"[red]- {webmessage.error_message} - "
-        f"{render_time(webmessage.time)}[/]"
+        f"[red]- {webmessage.error_message} - " f"{render_time(webmessage.time)}[/]"
     )

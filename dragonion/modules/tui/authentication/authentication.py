@@ -1,6 +1,7 @@
 from textual.app import ComposeResult
-from textual.widgets import Static
 from textual.containers import Center
+from textual.widgets import Static
+
 from .widgets.containers import LoginContainer
 
 
@@ -21,8 +22,9 @@ class LoginWidget(Static):
 
     def _on_compose(self) -> None:
         from .. import app
+
         # noinspection PyTypeChecker
-        app.title = 'dragonion - authentication'
+        app.title = "dragonion - authentication"
 
     def compose(self) -> ComposeResult:
         yield Center(LoginContainer())

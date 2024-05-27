@@ -1,6 +1,7 @@
 from textual.app import ComposeResult
-from textual.widgets import Static
 from textual.containers import Center
+from textual.widgets import Static
+
 from .widgets.containers import GenerateIdentityContainer
 
 
@@ -21,8 +22,9 @@ class IdentityWidget(Static):
 
     def _on_compose(self) -> None:
         from .. import app
+
         # noinspection PyTypeChecker
-        app.title = 'dragonion - identity'
+        app.title = "dragonion - identity"
 
     def compose(self) -> ComposeResult:
         yield Center(GenerateIdentityContainer())

@@ -1,8 +1,8 @@
-from textual.app import ComposeResult
-from textual.widgets import Static, Label
-from textual import events
-
 from datetime import datetime
+
+from textual import events
+from textual.app import ComposeResult
+from textual.widgets import Label, Static
 
 
 class Avatar(Static):
@@ -66,19 +66,19 @@ class MessageContent(Static):
         super().__init__()
 
     def _on_mount(self, event: events.Mount) -> None:
-        self.query_one('.message_time').visible = False
+        self.query_one(".message_time").visible = False
 
     def _on_enter(self, event: events.Focus) -> None:
-        self.query_one('.message_time').visible = True
+        self.query_one(".message_time").visible = True
 
     def _on_leave(self, event: events.Blur) -> None:
-        self.query_one('.message_time').visible = False
+        self.query_one(".message_time").visible = False
 
     def compose(self) -> ComposeResult:
-        yield Static(self.message, classes='_message_content_text', shrink=True)
+        yield Static(self.message, classes="_message_content_text", shrink=True)
         yield Static(
             f"[#a5abb3][{self.time.time().strftime('%H:%M:%S')}][/]",
-            classes='message_time'
+            classes="message_time",
         )
 
 
@@ -119,14 +119,8 @@ class Message(Static):
 
     def compose(self) -> ComposeResult:
         yield Avatar(symb=self.avatar)
-        yield TextMessage(
-            author=self.author,
-            message=self.message,
-            time=self.time
-        )
+        yield TextMessage(author=self.author, message=self.message, time=self.time)
 
     def add_message(self, message: str, time: datetime):
-        self.query_one(TextMessage).mount(
-            m := MessageContent(message, time)
-        )
-        self.app.query_one('MessagesContainer').scroll_adaptive_to(m)
+        self.query_one(TextMessage).mount(m := MessageContent(message, time))
+        self.app.query_one("MessagesContainer").scroll_adaptive_to(m)

@@ -1,13 +1,13 @@
-from itertools import accumulate
 from bisect import bisect
+from itertools import accumulate
 from random import randrange
 
 
 def random_emoji():
     emoji_ranges = [
-        ('\U0001F300', '\U0001F579'),
-        ('\U0001F57B', '\U0001F5A3'),
-        ('\U0001F5A5', '\U0001F5FF')
+        ("\U0001F300", "\U0001F579"),
+        ("\U0001F57B", "\U0001F5A3"),
+        ("\U0001F5A5", "\U0001F5FF"),
     ]
 
     count = [ord(r[-1]) - ord(r[0]) + 1 for r in emoji_ranges]

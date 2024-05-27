@@ -1,17 +1,10 @@
-from ..utils.results import ServiceAuthResult
-
 from textual import on
 from textual.app import ComposeResult
-from .inputs import AuthFileSelect, RawStringsAuthLayout
-
-from textual.widgets import (
-    Static,
-    Label,
-    Input,
-    Select,
-    Button
-)
 from textual.containers import Center
+from textual.widgets import Button, Input, Label, Select, Static
+
+from ..utils.results import ServiceAuthResult
+from .inputs import AuthFileSelect, RawStringsAuthLayout
 
 
 class AuthVariants(Static):
@@ -23,7 +16,7 @@ class AuthVariants(Static):
 
     def compose(self) -> ComposeResult:
         yield AuthFileSelect()
-        yield Center(Label('OR', classes='margin-1'))
+        yield Center(Label("OR", classes="margin-1"))
         yield RawStringsAuthLayout()
 
     @on(Input.Changed)
@@ -32,9 +25,10 @@ class AuthVariants(Static):
         Disable and enable file select on raw strings input changed
         :return:
         """
-        if self.query_one('#login_auth_string_input', expect_type=Input).value \
-                or self. \
-                query_one("#login_service_id_input", expect_type=Input).value:
+        if (
+            self.query_one("#login_auth_string_input", expect_type=Input).value
+            or self.query_one("#login_service_id_input", expect_type=Input).value
+        ):
             self.query_one(AuthFileSelect).disabled = True
         else:
             self.query_one(AuthFileSelect).disabled = False
@@ -48,21 +42,15 @@ class AuthVariants(Static):
         """
         if event.value:
             self.query_one(
-                '#login_auth_string_input',
-                expect_type=Input
+                "#login_auth_string_input", expect_type=Input
             ).disabled = True
-            self.query_one(
-                '#login_service_id_input',
-                expect_type=Input
-            ).disabled = True
+            self.query_one("#login_service_id_input", expect_type=Input).disabled = True
         else:
             self.query_one(
-                '#login_auth_string_input',
-                expect_type=Input
+                "#login_auth_string_input", expect_type=Input
             ).disabled = False
             self.query_one(
-                '#login_service_id_input',
-                expect_type=Input
+                "#login_service_id_input", expect_type=Input
             ).disabled = False
 
 
@@ -75,12 +63,14 @@ class LoginContainer(Static):
 
     def compose(self) -> ComposeResult:
         yield Center(AuthVariants())
-        yield Center(Button(
-            label='Authenticate',
-            name='authenticate_button',
-            variant='success',
-            id='login_authenticate_button'
-        ))
+        yield Center(
+            Button(
+                label="Authenticate",
+                name="authenticate_button",
+                variant="success",
+                id="login_authenticate_button",
+            )
+        )
 
     @on(Button.Pressed, "#login_authenticate_button")
     def on_auth_button_pressed(self, _: Button.Pressed):
@@ -92,18 +82,24 @@ class LoginContainer(Static):
         """
         try:
             from ... import app
+
             app.service_auth = ServiceAuthResult(
                 raw_auth_strings=(
-                    (_service_id := self.query_one(
-                        '#login_service_id_input',
-                        expect_type=Input).value),
-                    (_auth_string := self.query_one(
-                        '#login_auth_string_input',
-                        expect_type=Input).value)
+                    (
+                        _service_id := self.query_one(
+                            "#login_service_id_input", expect_type=Input
+                        ).value
+                    ),
+                    (
+                        _auth_string := self.query_one(
+                            "#login_auth_string_input", expect_type=Input
+                        ).value
+                    ),
                 ),
-                service_auth_file=self.query_one(Select).value
+                service_auth_file=self.query_one(Select).value,
             )
         except Exception as e:
             assert e
             from ... import app
+
             app.bell()

@@ -1,14 +1,9 @@
 from textual import on
 from textual.app import ComposeResult
-from .inputs import UsernameInputLayout
-
-from textual.widgets import (
-    Static,
-    Input,
-    Button,
-    LoadingIndicator
-)
 from textual.containers import Center
+from textual.widgets import Button, Input, LoadingIndicator, Static
+
+from .inputs import UsernameInputLayout
 
 
 class GenerateIdentityContainer(Static):
@@ -20,13 +15,15 @@ class GenerateIdentityContainer(Static):
 
     def compose(self) -> ComposeResult:
         yield Center(UsernameInputLayout())
-        yield Center(Button(
-            label='Generate identity',
-            name='generate_identity_button',
-            variant='success',
-            id='generate_identity_button',
-            disabled=True
-        ))
+        yield Center(
+            Button(
+                label="Generate identity",
+                name="generate_identity_button",
+                variant="success",
+                id="generate_identity_button",
+                disabled=True,
+            )
+        )
 
     @on(Button.Pressed, "#generate_identity_button")
     @on(Input.Submitted, "#username_input")
@@ -37,17 +34,17 @@ class GenerateIdentityContainer(Static):
         :return: Modifies global app.identity to generated
         """
         try:
-            from ... import app
             from dragonion_core.proto.encryption.identity import Identity
 
-            app.query_one('IdentityWidget').remove()
+            from ... import app
+
+            app.query_one("IdentityWidget").remove()
             app.mount(LoadingIndicator())
 
-            if _username := self.query_one('#username_input', expect_type=Input).value:
-                app.identity = Identity(
-                    username=_username
-                )
+            if _username := self.query_one("#username_input", expect_type=Input).value:
+                app.identity = Identity(username=_username)
         except Exception as e:
             assert e
             from ... import app
+
             app.bell()

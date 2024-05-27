@@ -1,10 +1,9 @@
-from dragonion.utils.core.emoji import random_emoji
 from dataclasses import dataclass, field
 
 import websockets.client
-
 from socks import socksocket
 
+from dragonion.utils.core.emoji import random_emoji
 from dragonion.utils.onion import Onion
 
 
